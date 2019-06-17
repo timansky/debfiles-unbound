@@ -12,6 +12,16 @@ if [ "$action" = configure ]; then
 	chown unbound:unbound /var/lib/unbound/root.hints
 	chown unbound:unbound /var/log/unbound
 	chown unbound:unbound /run/unbound
+
+  # remove unussed files
+	rm -f /etc/unbound/unbound.conf.d/qname-minimisation.conf
+	rm -f /etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf
+	rm -f /lib/systemd/system/unbound-resolvconf.service
+	rm -f /usr/lib/resolvconf/dpkg-event.d/unbound
+	rm -f /usr/lib/unbound/package-helper
+	rm -f /etc/init.d/unbound
+	rm -f /etc/insserv.conf.d/unbound
+	rm -f /etc/resolvconf/update.d/unbound
 fi
 
 if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then

@@ -1,9 +1,1 @@
 rm_conffile /etc/default/unbound 1.5.7-2~
-rm_conffile /etc/unbound/unbound.conf.d/qname-minimisation.conf
-rm_conffile /etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf
-rm_conffile /lib/systemd/system/unbound-resolvconf.service
-rm_conffile /usr/lib/resolvconf/dpkg-event.d/unbound
-rm_conffile /usr/lib/unbound/package-helper
-rm_conffile /etc/init.d/unbound
-rm_conffile /etc/insserv.conf.d/unbound
-rm_conffile /etc/resolvconf/update.d/unbound
