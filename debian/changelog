@@ -1,3 +1,9 @@
+unbound (1.9.2-1+ubuntu18.04) bionic; urgency=low
+
+  * New upstream version 1.9.2
+
+ -- Timur Kumakbayev <timansky@neko.kz>  Mon, Jun 17 19:47:41 2019 +0600
+
 unbound (1.9.1-2+ubuntu18.04) bionic; urgency=low
 
   * Remove unused files
