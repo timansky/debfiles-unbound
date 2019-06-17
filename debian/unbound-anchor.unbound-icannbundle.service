@@ -1,0 +1,11 @@
+[Unit]
+Description=Update of the root trust certificate bundle for DNSSEC validation
+After=syslog.target
+After=network.target
+
+[Service]
+Type=oneshot
+User=unbound
+ExecStart=/usr/bin/curl -SLsq -o /var/lib/unbound/icannbundle.pem https://data.iana.org/root-anchors/icannbundle.pem
+ExecStartPost=/bin/bash -c "netstat -ant | grep ':8953 ' | grep LISTEN > /dev/null && echo -e 'Reloading unbound: ' $(/usr/sbin/unbound-control reload) || echo 'Warning: no opened port for unbound_control'"
+SuccessExitStatus=1

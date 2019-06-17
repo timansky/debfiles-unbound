@@ -1,0 +1,13 @@
+[Unit]
+Description=Monthly update of the root trust certificate for DNSSEC
+After=network.target
+After=syslog.target
+Requires=unbound-icannbundle.service
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+AccuracySec=24h
+
+[Install]
+WantedBy=timers.target

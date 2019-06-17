@@ -1,0 +1,11 @@
+[Unit]
+Description=Update of the root hints
+After=syslog.target
+After=network.target
+
+[Service]
+Type=oneshot
+User=unbound
+ExecStart=/usr/bin/curl -SLq -o /var/lib/unbound/root.hints https://www.internic.net/domain/named.cache
+ExecStartPost=/bin/bash -c "netstat -ant | grep ':8953 ' | grep LISTEN > /dev/null && echo -e 'Reloading unbound: ' $(/usr/sbin/unbound-control reload) || echo 'Warning: no opened port for unbound_control'"
+SuccessExitStatus=1

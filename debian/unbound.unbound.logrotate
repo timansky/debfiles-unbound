@@ -1,0 +1,12 @@
+/var/log/unbound/*.log {
+  daily
+  rotate 7
+  notifempty
+  missingok
+  compress
+  create 644
+  sharedscripts
+  postrotate
+    /usr/local/sbin/unbound-control log_reopen
+  endscript
+}

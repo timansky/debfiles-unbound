@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+if [ "$1" = remove ]; then
+    rm -rf /etc/unbound/unbound_control.key \
+           /etc/unbound/unbound_control.pem \
+           /etc/unbound/unbound_server.key \
+           /etc/unbound/unbound_server.pem
+    rm -f /var/lib/unbound/root.key
+    rm -f /var/lib/unbound/root.hints
+    deluser --quiet unbound >/dev/null || true
+fi
+
+if [ "$1" = purge ]; then
+    rm -rf /etc/unbound
+    rm -rf /var/lib/unbound
+    rm -rf /var/log/unbound
+    rm -rf /run/unbound
+fi
+
+if [ "$1" = "remove" ]; then
+	if [ -d /run/systemd/system ]; then
+		/bin/systemctl --system daemon-reload >/dev/null || true
+	fi
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		/bin/systemctl unmask 'systemd-resolved.service' >/dev/null || true
+		/bin/systemctl enable 'systemd-resolved.service' >/dev/null || true
+	fi
+	if [ -d /run/systemd/system ]; then
+		/bin/systemctl --system daemon-reload >/dev/null || true
+		/bin/systemctl start 'systemd-resolved.service' >/dev/null || true
+	fi
+fi
+
+#DEBHELPER#

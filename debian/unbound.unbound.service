@@ -1,0 +1,20 @@
+[Unit]
+Description=Unbound recursive DNS server
+Documentation=man:unbound(8)
+After=syslog.target
+After=network.target
+After=unbound-keygen.service
+Requires=unbound-keygen.service
+Before=nss-lookup.target
+Wants=nss-lookup.target
+
+[Service]
+Type=simple
+Restart=on-failure
+EnvironmentFile=-/etc/default/unbound
+ExecStartPre=/usr/sbin/unbound-checkconf
+ExecStart=/usr/sbin/unbound -p -d $DAEMON_OPTS
+ExecReload=/usr/sbin/unbound-control reload
+
+[Install]
+WantedBy=multi-user.target

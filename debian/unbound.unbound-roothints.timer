@@ -1,0 +1,13 @@
+[Unit]
+Description=Monthly update of the root hints
+After=syslog.target
+After=network.target
+Requires=unbound-roothints.service
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+AccuracySec=24h
+
+[Install]
+WantedBy=timers.target

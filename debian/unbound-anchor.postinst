@@ -1,0 +1,26 @@
+#!/bin/sh -e
+
+action="$1"
+oldversion="$2"
+
+if [ "$action" = configure ]; then
+	if ! getent passwd unbound >/dev/null; then
+		adduser --quiet --system --group --no-create-home --home /var/lib/unbound unbound
+	fi
+	chown unbound:unbound /var/lib/unbound
+	chown unbound:unbound /var/lib/unbound/icannbundle.pem
+fi
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+	fi
+fi
+
+#DEBHELPER#
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-deconfigure" ] || [ "$1" = "abort-remove" ] ; then
+	if [ -d /run/systemd/system ]; then
+		systemctl --system daemon-reload >/dev/null || true
+	fi
+fi

@@ -1,0 +1,12 @@
+etc/default
+etc/unbound
+etc/unbound/unbound.conf.d
+run/unbound
+usr/sbin
+usr/share/doc/unbound/contrib
+usr/share/doc/unbound/examples
+usr/share/man/man5
+usr/share/man/man8
+var/lib/unbound
+var/log/unbound
+

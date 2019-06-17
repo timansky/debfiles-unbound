@@ -1,0 +1,14 @@
+[Unit]
+Description=Unbound control key and certificate generator
+After=syslog.target
+After=network.target
+ConditionPathExists=!/etc/unbound/unbound_control.key
+
+[Service]
+Type=oneshot
+Group=unbound
+ExecStart=/usr/sbin/unbound-control-setup -d /etc/unbound/
+RemainAfterExit=yes
+
+[Install]
+WantedBy=unbound.service
