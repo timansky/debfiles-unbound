@@ -7,6 +7,6 @@
   create 644
   sharedscripts
   postrotate
-    /usr/local/sbin/unbound-control log_reopen
+    /bin/pidof unbound > /dev/null && /usr/local/sbin/unbound-control log_reopen
   endscript
 }
