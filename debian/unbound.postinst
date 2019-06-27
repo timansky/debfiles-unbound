@@ -7,6 +7,12 @@ if [ "$action" = configure ]; then
 	if ! getent passwd unbound >/dev/null; then
 		adduser --quiet --system --group --no-create-home --home /var/lib/unbound unbound
 	fi
+
+	test -f /etc/unbound/unbound_control.pem && chown root:unbound /etc/unbound/unbound_control.pem
+	test -f /etc/unbound/unbound_control.key && chown root:unbound /etc/unbound/unbound_control.key
+	test -f /etc/unbound/unbound_server.pem && chown root:unbound /etc/unbound/unbound_server.pem
+	test -f /etc/unbound/unbound_server.key && chown root:unbound /etc/unbound/unbound_server.key
+
 	chown unbound:unbound /var/lib/unbound
 	chown unbound:unbound /var/lib/unbound/root.key
 	chown unbound:unbound /var/lib/unbound/root.hints

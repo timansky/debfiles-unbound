@@ -1,5 +1,11 @@
 unbound (1.9.2-2+ubuntu18.04) bionic; urgency=low
 
+  * Fix owner pre existing keys
+
+ -- Timur Kumakbayev <timansky@neko.kz>  Mon, 27 Jun 2019 18:30:24 +0600
+
+unbound (1.9.2-2+ubuntu18.04) bionic; urgency=low
+
   * Add unbound process running check to logrotate
 
  -- Timur Kumakbayev <timansky@neko.kz>  Mon, 18 Jun 2019 13:55:17 +0600
